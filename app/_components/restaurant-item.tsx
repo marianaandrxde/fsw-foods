@@ -20,16 +20,18 @@ const RestaurantItem = ({ restaurant }: RestaurantItemProps) => {
           alt={restaurant.name}
         />
 
+        <div className="absolute left-0 top-0 gap-2 rounded-full bg-primary px-2 py-[2px] text-white">
+          <StarIcon size={12} className="fill-yellow-500 text-yellow-500" />
+          <span className="text-xs font-semibold">5.0</span>
+        </div>
 
-          <div className="absolute left-0 gap-2 top-0 bg-primary px-2 py-[2px] rounded-full text-white">
-            <StarIcon size={12} className="fill-yellow-500 text-yellow-500" />
-            <span className="font-semibold text-xs">5.0</span>
-          </div>
-      </div>
 
-      <Button className="absolute top-2 right-2 bg-gray-700 rounded-full h-7 w-7">
-        <HeartIcon size={16} className="fill-white"/>
+      <Button 
+      size="icon"
+      className="absolute right-2 top-2 h-7 w-7 rounded-full bg-gray-700">
+        <HeartIcon size={16} className="fill-white" />
       </Button>
+      </div>
 
       <div>
         <h3 className="text-sm font-semibold">{restaurant.name}</h3>
