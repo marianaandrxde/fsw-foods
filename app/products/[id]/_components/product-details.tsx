@@ -9,6 +9,7 @@ import { BikeIcon, ChevronLeftIcon, TimerIcon } from "lucide-react";
 import { useState } from "react";
 import { Card } from "@/app/_components/ui/card";
 import ProductList from "@/app/_components/product-list";
+import DeliveryInfo from "@/app/_components/delivery-info";
 
 
 interface ProductDetailsProps {
@@ -89,35 +90,7 @@ const ProductDetails = ({ product, complementaryProducts }: ProductDetailsProps)
             </div>
 
             <div className="px-5">
-                <Card className="flex justify-around py-3 mt-6">
-                    {/* CUSTO*/}
-                    <div className="flex flex-col items-center">
-                        <div className="flex items-center gap-2 text-muted-foreground">
-                            <BikeIcon size={14} />
-                            <span>Entrega</span>
-                        </div>
-
-                        {Number(product.restaurant.deliveryFree) > 0 ? (
-                            <p className="text-xs font-semibold">
-                                {formatCurrency(Number(product.restaurant.deliveryFree))}
-                            </p>
-                        ) : (
-                            <p className="text-sm font-semibold">Grátis</p>
-                        )}
-                    </div>
-
-                    {/* TEMPO*/}
-                    <div className="flex flex-col items-center">
-                        <div className="flex items-center gap-2 text-muted-foreground">
-                            <TimerIcon size={14} />
-                            <span>Entrega</span>
-                        </div>
-
-                        <p className="text-xs font-semibold">
-                            {product.restaurant.deliveryTimeMinutes} min
-                        </p>
-                    </div>
-                </Card>
+                <DeliveryInfo restaurant={product.restaurant}/>
             </div>
 
             <div className="mt-6 space-y-3 px-5">
