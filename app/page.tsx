@@ -1,11 +1,11 @@
 import Search from "./_components/search";
 import Header from "./_components/header";
 import CategoryList from "./_components/category-list";
-import Image from "next/image";
 import ProductList from "./_components/product-list";
 import { ChevronRightIcon } from "lucide-react";
 import { Button } from "./_components/ui/button";
 import { db } from "./_lib/prisma";
+import PromoBanner from "./_components/promo-banner";
 
 const Home = async () => {
   const products = await db.product.findMany({
@@ -13,10 +13,10 @@ const Home = async () => {
     //   },
     //   },
     //   take:10,
-          include:{
-            restaurant: true,
-          }
-    });
+    include: {
+      restaurant: true,
+    },
+  });
 
   return (
     <>
@@ -31,27 +31,31 @@ const Home = async () => {
       </div>
 
       <div className="px-5 pt-6">
-        <Image
+        <PromoBanner
           src="/promo-banner-01.png"
-          alt="Até 30% de desconto em pizza"
-          height={0}
-          width={0}
-          sizes="100vw"
-          className="h-auto w-full object-contain"
-          quality={100}
+          alt="Até 30% de desconto em pizzas!"
         />
       </div>
 
-      <div className="pt-6 spave-y-4">
+      <div className="spave-y-4 pt-6">
         <div className="flex items-center justify-between px-5">
           <h2 className="font-semibold">Pedidos recomendados</h2>
-          <Button variant="ghost" className="h-fit p-0 text primary hover:bg-transparent"
+          <Button
+            variant="ghost"
+            className="text primary h-fit p-0 hover:bg-transparent"
           >
-            Ver todos 
-            <ChevronRightIcon size={16}/>
+            Ver todos
+            <ChevronRightIcon size={16} />
           </Button>
         </div>
         <ProductList products={products} />
+      </div>
+
+      <div className="px-5 pt-6">
+        <PromoBanner
+          src="/promo-banner-02.png"
+          alt="A partir de R$ 19,90 em lanches.!"
+        />
       </div>
     </>
   );
