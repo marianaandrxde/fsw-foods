@@ -42,16 +42,14 @@ const ProductItem = ({ product }: ProductItemProps) => {
         )}
         </div>
 
-    
-
-      {/* <div>
+      <div>
         {product.discountPercentage && (
           <div className="absolute left-0 gap-2 top-0 bg-primary px-2 py-[2px] rounded-full text-white">
             <ArrowDownIcon size={12} />
             <span className="font-semibold text-xs">{product.discountPercentage}%</span>
           </div>
         )}
-      </div> */}
+      </div>
 
         <span className="text-xs text-muted-foreground">
           {product.restaurant.name}
