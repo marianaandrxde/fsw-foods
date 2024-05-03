@@ -129,9 +129,13 @@ const ProductDetails = ({ product, complementaryProducts }: ProductDetailsProps)
 
             <div className="mt-6 space-y-3">
                 <h3 className="font-semibold px-5">Sucos</h3>
-                <p className="text-sm text-muted-foreground">
                     <ProductList products={complementaryProducts} />
-                </p>
+            </div>
+
+            <div className="mt-6 px-5">
+                <Button className="font-semibold w-full">
+                    Adicionar à sacola
+                </Button>
             </div>
         </div>
     );
