@@ -5,9 +5,8 @@ import { Prisma } from "@prisma/client";
 import { formatCurrency, calculateProductTotalPrice } from "@/app/_helpers/price";
 import DiscountBadge from "@/app/_components/discount-badge";
 import { Button } from "@/app/_components/ui/button";
-import { BikeIcon, ChevronLeftIcon, TimerIcon } from "lucide-react";
+import {  ChevronLeftIcon } from "lucide-react";
 import { useState } from "react";
-import { Card } from "@/app/_components/ui/card";
 import ProductList from "@/app/_components/product-list";
 import DeliveryInfo from "@/app/_components/delivery-info";
 
