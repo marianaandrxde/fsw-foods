@@ -7,6 +7,7 @@ import { Button } from "./_components/ui/button";
 import { db } from "./_lib/prisma";
 import PromoBanner from "./_components/promo-banner";
 import RestaurantList from "./_components/restaurant-list";
+import Link from "next/link";
 
 const Home = async () => {
   const products = await db.product.findMany({
@@ -38,7 +39,7 @@ const Home = async () => {
         />
       </div>
 
-      <div className="spave-y-4 pt-6">
+      <div className="spave-y-4 pt-6 px-5">
         <div className="flex items-center justify-between px-5">
           <h2 className="font-semibold">Pedidos recomendados</h2>
           <Button
@@ -47,7 +48,7 @@ const Home = async () => {
           >
             Ver todos
             <ChevronRightIcon size={16} />
-          </Button>
+          </Button> 
         </div>
         <ProductList products={products} />
       </div>
@@ -59,16 +60,17 @@ const Home = async () => {
         />
       </div>
 
-      <div className="spave-y-4 py-6">
+      <div className="px-5 spave-y-4 py-6">
         <div className="flex items-center justify-between px-5">
           <h2 className="font-semibold">Restaurantes recomendados</h2>
+          <Link href="/restaurants/recommended">
           <Button
             variant="ghost"
             className="text primary h-fit p-0 hover:bg-transparent"
           >
             Ver todos
             <ChevronRightIcon size={16} />
-          </Button>
+          </Button></Link>
         </div>
         <RestaurantList />
       </div>

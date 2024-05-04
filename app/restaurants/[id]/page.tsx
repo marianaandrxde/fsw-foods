@@ -62,7 +62,7 @@ const RestaurantPage = async ({ params: { id } }: RestaurantPageProps) => {
               src={restaurant.imageUrl}
               alt={restaurant.name}
               fill
-              className="object-cover"
+              className="object-cover rounded-full"
             />
           </div>
           <h1 className="text-xl font-semibold">{restaurant.name}</h1>
@@ -84,21 +84,21 @@ const RestaurantPage = async ({ params: { id } }: RestaurantPageProps) => {
             key={category.id}
             className="min-w-[167px] rounded-lg bg-[#F4F4F4]"
           >
-            <span className="text-xs text-muted-foreground">
+            <span className="flex items-center justify-center text-xs text-muted-foreground">
               {category.name}
             </span>
           </div>
         ))}
       </div>
 
-      <div className="mt-6 space-y-4">
+      <div className="px-5 mt-6 space-y-4">
         <h2 className="px-5 font-semibold">Mais Pedidos</h2>
         <ProductList products={restaurant.products} />
       </div>
 
       {restaurant.categories.map((category) => (
-        <div className="mt-6 space-y-4" key={category.id}>
-          <h2 className="mt-6 space-y-4">{category.name}</h2>
+        <div className="px-5 mt-6 space-y-4" key={category.id}>
+          <h2 className="px-5 font-semibold mt-6 space-y-4">{category.name}</h2>
           <ProductList products={category.products} />
         </div>
       ))}
