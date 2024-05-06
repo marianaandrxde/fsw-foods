@@ -5,7 +5,7 @@ import { Prisma } from "@prisma/client";
 import { formatCurrency, calculateProductTotalPrice } from "@/app/_helpers/price";
 import DiscountBadge from "@/app/_components/discount-badge";
 import { Button } from "@/app/_components/ui/button";
-import {  ChevronLeftIcon } from "lucide-react";
+import {  ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { useState } from "react";
 import ProductList from "@/app/_components/product-list";
 import DeliveryInfo from "@/app/_components/delivery-info";
@@ -35,7 +35,7 @@ const ProductDetails = ({ product, complementaryProducts }: ProductDetailsProps)
     });
 
     return (
-        <div className="py-5 relative z-index mt-[-5px] rounded-tr-3xl bg-white">
+        <div className="p-5 py-5 relative z-index mt-[-5px] rounded-tr-3xl bg-white">
             <div className="flex items-center gap-=[0.375rem]">
                 <div className="relative h-6 w-6">
                     <Image src={product.restaurant.imageUrl}
@@ -83,7 +83,7 @@ const ProductDetails = ({ product, complementaryProducts }: ProductDetailsProps)
                     <span className="w-4">{quantity}</span>
                     <Button size="icon"
                         onClick={handleIncreaseQuantityClick}>
-                        <ChevronLeftIcon />
+                        <ChevronRightIcon />
                     </Button>
                 </div>
             </div>
