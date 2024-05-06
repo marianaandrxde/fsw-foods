@@ -5,6 +5,7 @@ import { formatCurrency } from "../_helpers/price";
 import { Prisma } from "@prisma/client";
 import { ArrowDownIcon } from "lucide-react";
 import Link from "next/link";
+import { cn } from "@/_lib/utils";
 
 
 interface ProductItemProps {
@@ -17,11 +18,13 @@ interface ProductItemProps {
       },
     },
   }>;
+
+  className?: string;
 }
 
-const ProductItem = ({ product }: ProductItemProps) => {
+const ProductItem = ({ product, className }: ProductItemProps) => {
   return (
-    <Link className="w-[150px] min-w-[150px] space-y-2" href={`/products/${product.id}`}>
+    <Link className={cn("w-[150px] min-w-[150px] space-y-2", className)} href={`/products/${product.id}`}>
       <div className="w-[150px] min-w-[150px] space-y-2">
         <div className="relative h-[150px] w-full">
           <Image

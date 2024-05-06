@@ -15,7 +15,7 @@ const ProductImage = ({ product }: ProductImageProps) => {
     
     const handleBackClick = () => router.back();
     return (
-        <div className="relative h-[360px] w-full">
+        <div className="relative w-full h-[360px]">
             <Image
                 src={product.imageUrl}
                 alt={product.name}
@@ -24,10 +24,10 @@ const ProductImage = ({ product }: ProductImageProps) => {
             />
 
             <Button
-                className="absolut left-4 top-4 rounded-full bg-white text-foreground hover:text-white"
+                className="absolute
+                 left-4 top-4 rounded-full bg-white text-foreground hover:text-white"
                 size="icon"
-                onClick={handleBackClick}
-            >
+                onClick={handleBackClick}>
                 <ChevronLeftIcon />
             </Button>
         </div>
