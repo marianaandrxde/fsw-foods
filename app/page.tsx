@@ -42,13 +42,14 @@ const Home = async () => {
       <div className="spave-y-4 pt-6 px-5">
         <div className="flex items-center justify-between px-5">
           <h2 className="font-semibold">Pedidos recomendados</h2>
+          <Link href="/products/recommended">
           <Button
             variant="ghost"
             className="text primary h-fit p-0 hover:bg-transparent"
           >
             Ver todos
             <ChevronRightIcon size={16} />
-          </Button> 
+          </Button> </Link>
         </div>
         <ProductList products={products} />
       </div>
