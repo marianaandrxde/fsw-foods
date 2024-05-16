@@ -34,7 +34,7 @@ const ProductItem = ({ product, className }: ProductItemProps) => {
             className="rounded-lg object-cover shadow-md"
           />
 
-          {product.discountPercentage && (
+          {product.discountPercentage > 0 && (
             <div className="absolute left-0 gap-2 top-0 bg-primary px-2 py-[2px] rounded-full text-white">
               <ArrowDownIcon size={12} />
               <span className="font-semibold text-xs">{product.discountPercentage}%</span>
