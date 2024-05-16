@@ -6,6 +6,7 @@ import { ReactNode } from "react";
 import { useState } from "react";
 import { useMemo } from "react";
 import { calculateProductTotalPrice } from "../_helpers/price";
+import CartItem from "../_components/cart-item";
 
 export interface CartProduct
   extends Prisma.ProductGetPayload<{
@@ -25,6 +26,7 @@ interface ICartContext {
   subtotalPrice: number;
   totalPrice: number;
   totalDiscounts: number;
+  totalQuantity: number;
   addProductToCart: ({
     product,
     quantity,
@@ -52,6 +54,7 @@ export const CartContext = createContext<ICartContext>({
   subtotalPrice: 0,
   totalPrice: 0,
   totalDiscounts: 0,
+  totalQuantity: 0,
   addProductToCart: () => {},
   decreaseProductQuantity: () => {},
   increaseProductQuantity: () => {},
@@ -128,6 +131,14 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     );
   };
 
+  const totalQuantity = useMemo(() => {
+    return (
+      products.reduce((acc, product) => {
+        return acc + product.quantity;
+      }, 0)
+    );
+  }, [products]);
+
   const addProductToCart = ({
     product,
     quantity,
@@ -182,6 +193,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         subtotalPrice,
         totalPrice,
         totalDiscounts,
+        totalQuantity,
         addProductToCart,
         decreaseProductQuantity,
         increaseProductQuantity,
