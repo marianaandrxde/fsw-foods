@@ -6,9 +6,13 @@ import { formatCurrency, calculateProductTotalPrice } from "@/app/_helpers/price
 import DiscountBadge from "@/app/_components/discount-badge";
 import { Button } from "@/app/_components/ui/button";
 import {  ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ProductList from "@/app/_components/product-list";
 import DeliveryInfo from "@/app/_components/delivery-info";
+import { CartContext } from "@/app/_context/cart";
+import { SheetContent, SheetHeader, SheetTitle } from "@/app/_components/ui/sheet";
+import { Sheet } from "@/app/_components/ui/sheet";
+import Cart from "@/app/_components/cart";
 
 
 interface ProductDetailsProps {
@@ -26,6 +30,14 @@ interface ProductDetailsProps {
 
 const ProductDetails = ({ product, complementaryProducts }: ProductDetailsProps) => {
     const [quantity, setQuantity] = useState(1);
+    const [isCartOpen, setIsCartOpen] = useState(false);
+    const {addProductToCart, products} = useContext(CartContext)
+    const handleAddToCartClick = () => {
+        addProductToCart(product, quantity)
+        setIsCartOpen(true)
+    };
+
+    console.log(products)
 
     const handleIncreaseQuantityClick = () => setQuantity((currentState) => currentState + 1);
     const handleDecreaseQuantityClick = () => setQuantity((currentState) => {
@@ -35,6 +47,7 @@ const ProductDetails = ({ product, complementaryProducts }: ProductDetailsProps)
     });
 
     return (
+       <>
         <div className="p-5 py-5 relative z-index mt-[-5px] rounded-tr-3xl bg-white">
             <div className="flex items-center gap-=[0.375rem]">
                 <div className="relative h-6 w-6">
@@ -105,12 +118,23 @@ const ProductDetails = ({ product, complementaryProducts }: ProductDetailsProps)
             </div>
 
             <div className="mt-6 px-5">
-                <Button className="font-semibold w-full">
+                <Button className="font-semibold w-full"
+                onClick={handleAddToCartClick}>
                     Adicionar à sacola
                 </Button>
             </div>
         </div>
+
+        <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
+            <SheetContent className="w-[90vw]">
+                <SheetHeader>
+                <SheetTitle className="text-left">Sacola</SheetTitle>
+                </SheetHeader>
+                <Cart />
+            </SheetContent>
+        </Sheet>
+        </>
     );
-}
+};
 
 export default ProductDetails;
