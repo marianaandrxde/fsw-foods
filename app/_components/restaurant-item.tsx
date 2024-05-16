@@ -20,7 +20,7 @@ const RestaurantItem = ({ restaurant, className }: RestaurantItemProps) => {
 
     <div className="w-full space-y-3">
       {}
-      <div className="relative h-[150px] w-full">
+      <div className="relative h-[150px] w-[150px]">
         <Image
           src={restaurant.imageUrl}
           fill

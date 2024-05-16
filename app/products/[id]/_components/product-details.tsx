@@ -86,7 +86,7 @@ const ProductDetails = ({
   return (
     <>
       <div className="z-index relative mt-[-5px] rounded-tr-3xl bg-white p-5 py-5">
-        <div className="gap-=[0.375rem] flex items-center">
+        <div className="gap-=[0.375rem] space-x-2 px-5 flex items-center">
           <div className="relative h-6 w-6">
             <Image
               src={product.restaurant.imageUrl}
@@ -109,7 +109,7 @@ const ProductDetails = ({
                 {formatCurrency(calculateProductTotalPrice(product))}
               </h2>
 
-              {product.discountPercentage && (
+              {product.discountPercentage > 0 && (
                 <DiscountBadge product={product} />
               )}
             </div>
