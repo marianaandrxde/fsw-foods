@@ -75,7 +75,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     );
   }, [products]);
 
-  const totalDiscounts = subtotalPrice - totalPrice;
+  const totalDiscounts = subtotalPrice - totalPrice + Number(products?.[0]?.restaurant?.deliveryFree);
 
   const decreaseProductQuantity = (productId: string) => {
     const isProductAlreadyOnCart = products.some(
