@@ -12,13 +12,15 @@ const Cart = () => {
   const { products, subtotalPrice, totalPrice, totalDiscounts } =
     useContext(CartContext);
   return (
-    <div className="py-5">
-      <div className="space-y-4">
+    <div className="py-5 flex h-full flex-col">
+      <div className="flex-auto space-y-4">
         {products.map((product) => (
           <CartItem key={product.id} cartProduct={product} />
         ))}
       </div>
 
+    {products.length > 0 ? (
+        <>
       <div className="mt-6">
         <Card>
           <CardContent className="p-5 space-y-1">
@@ -39,9 +41,9 @@ const Cart = () => {
             <div className="flex items-center justify-between text-xs">
               <span className="text-muted-foreground">Entrega</span>
               <span>
-                {Number(products[0].restaurant.deliveryFree) == 0
+                {Number(products[0]?.restaurant.deliveryFree) == 0
                   ? (<span className="font-medium uppercase text-primary"> "Grátis"</span>)
-                  : formatCurrency(Number(products[0].restaurant.deliveryFree))}
+                  : formatCurrency(Number(products[0]?.restaurant.deliveryFree))}
               </span>
             </div>
 
@@ -58,6 +60,8 @@ const Cart = () => {
       <Button className="w-full mt-6">
         Finalizar pedido
       </Button>
+      </>
+    ): <h2 className="text-center font-medium">Sua sacola está vazia.</h2>}
     </div>
   );
 };
