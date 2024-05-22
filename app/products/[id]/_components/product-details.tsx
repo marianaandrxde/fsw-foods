@@ -52,11 +52,12 @@ const ProductDetails = ({
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] =
     useState(false);
+  
 
   const { addProductToCart, products } = useContext(CartContext);
 
-  const addToCart = ({emptyCart}: {emptyCart?: boolean}) => {
-    addProductToCart({product, quantity, emptyCart});
+  const addToCart = ({ emptyCart }: { emptyCart?: boolean }) => {
+    addProductToCart({ product, quantity, emptyCart });
     setIsCartOpen(true);
   };
 
@@ -70,7 +71,7 @@ const ProductDetails = ({
     }
 
     addToCart({
-        emptyCart: false,
+      emptyCart: false,
     });
   };
 
@@ -186,7 +187,7 @@ const ProductDetails = ({
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancelar</AlertDialogCancel>
-            <AlertDialogAction onClick={() => addToCart({emptyCart: true})}>Esvaziar sacola e adicionar</AlertDialogAction>
+            <AlertDialogAction onClick={() => addToCart({ emptyCart: true })}>Esvaziar sacola e adicionar</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
