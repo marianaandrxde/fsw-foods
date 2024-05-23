@@ -14,12 +14,19 @@ import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import { AlertDialogHeader, AlertDialogFooter, AlertDialogTrigger, AlertDialogAction, AlertDialogCancel, AlertDialogTitle, AlertDialogDescription, AlertDialogContent } from "./ui/alert-dialog";
 import { AlertDialog } from "./ui/alert-dialog";
+import { toast } from "sonner"
+import { useRouter } from "next/navigation";
 
-const Cart = () => {
+interface CartProps {
+  setIsOpen: (isOpen: boolean) => void;
+}
+
+const Cart = ({setIsOpen}: CartProps ) => {
   const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
   const { data } = useSession();
   const { products, subtotalPrice, totalPrice, totalDiscounts, clearCart } =
     useContext(CartContext);
+  const router = useRouter();
 
   const [isSubmitLoading, setIsSubmitLoading] = useState(false);
 
@@ -55,6 +62,15 @@ const Cart = () => {
       });
 
       clearCart();
+      setIsOpen(false);
+
+      toast("Pedido finalizado com sucesso", {
+        description: "Você pode acompanhá-lo na tela dos seus pedidos.",
+        action: {
+          label: "Meus pedidos",
+          onClick:() => router.push("/my-orders"),
+        },
+      });
     } catch (error) {
       console.log(error)
     } finally {
@@ -108,7 +124,7 @@ const Cart = () => {
             </Card>
           </div>
 
-          <Button className="w-full mt-6" onClick={()=> setIsConfirmDialogOpen(true)} disabled={isSubmitLoading}>
+          <Button className="w-full mt-6" onClick={() => setIsConfirmDialogOpen(true)} disabled={isSubmitLoading}>
             {isSubmitLoading && (
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
             )}
@@ -117,7 +133,7 @@ const Cart = () => {
         </>
       ) : <h2 className="absolute text-center font-medium">Sua sacola está vazia.</h2>}
     </div>
-    <AlertDialog open={isConfirmDialogOpen} onOpenChange={setIsConfirmDialogOpen}>
+      <AlertDialog open={isConfirmDialogOpen} onOpenChange={setIsConfirmDialogOpen}>
         <AlertDialogTrigger></AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>
@@ -127,11 +143,11 @@ const Cart = () => {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel  disabled={isSubmitLoading}> 
+            <AlertDialogCancel disabled={isSubmitLoading}>
               {isSubmitLoading && (
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            )}
-            Cancelar</AlertDialogCancel>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              )}
+              Cancelar</AlertDialogCancel>
             <AlertDialogAction onClick={handleFinishOrderClick}>Finalizar</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
