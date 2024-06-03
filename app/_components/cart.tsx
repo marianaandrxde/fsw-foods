@@ -7,10 +7,37 @@ import { format } from "path";
 import { formatCurrency } from "../_helpers/price";
 import { Separator } from "@radix-ui/react-separator";
 import { Button } from "./ui/button";
+import { createOrder } from "../_actions/order";
+import { OrderStatus } from "@prisma/client";
+import { useSession } from "next-auth/react";
 
 const Cart = () => {
+  const {data} = useSession()
+
   const { products, subtotalPrice, totalPrice, totalDiscounts } =
     useContext(CartContext);
+
+  const handleFinishOrderClick =  async () => {
+    if (!data?.user) return;
+
+    const restaurant = products[0].restaurant
+
+    await createOrder({
+      subtotalPrice,
+      totalDiscounts,
+      totalPrice,
+      deliveryFree: restaurant.deliveryFree,
+      deliveryTimeMinutes: restaurant.deliveryTimeMinutes,
+      restaurant: {
+        connect: {id: restaurant.id},
+      },
+      status: OrderStatus.CONFIRMED,
+      user: {
+        connect: {id: data.user.id},
+      },
+    });
+  };
+
   return (
     <div className="py-5 flex h-full flex-col">
       <div className="flex-auto space-y-4">
@@ -57,7 +84,7 @@ const Cart = () => {
         </Card>
       </div>
 
-      <Button className="w-full mt-6">
+      <Button className="w-full mt-6" onClick={handleFinishOrderClick}> 
         Finalizar pedido
       </Button>
       </>

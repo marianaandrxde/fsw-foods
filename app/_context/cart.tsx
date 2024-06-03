@@ -13,6 +13,8 @@ export interface CartProduct
     include: {
       restaurant: {
         select: {
+          id: true,
+          deliveryTimeMinutes: true,
           deliveryFree: true;
         };
       };
