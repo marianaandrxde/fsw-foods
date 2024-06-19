@@ -14,13 +14,13 @@ interface RestaurantItemProps {
 const RestaurantItem = ({ restaurant, className }: RestaurantItemProps) => {
   return (
     <Link
-    className={cn("min-w-[-266px] max-w-[-266px]", className)}
+    className={cn("min-w-[266px] max-w-[266px]", className)}
     href={`/restaurants/${restaurant.id}`}
     >
 
     <div className="w-full space-y-3">
       {}
-      <div className="relative h-[150px] w-[150px]">
+      <div className="relative h-[150px] w-full">
         <Image
           src={restaurant.imageUrl}
           fill
@@ -28,7 +28,7 @@ const RestaurantItem = ({ restaurant, className }: RestaurantItemProps) => {
           alt={restaurant.name}
         />
 
-        <div className="absolute left-0 top-0 gap-2 rounded-full bg-primary px-2 py-[2px] text-white">
+        <div className="absolute left-2 top-2 flex items-center gap-2 rounded-full bg-primary px-2 py-[2px] text-white">
           <StarIcon size={12} className="fill-yellow-500 text-yellow-500" />
           <span className="text-xs font-semibold">5.0</span>
         </div>
